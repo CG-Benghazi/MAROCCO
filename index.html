@@ -240,7 +240,7 @@
              class="coat-of-arms">
     </div>
 
-    <!-- وسام شعار عيد العرش 27 الخيالي -->
+    <!-- وسام شعار عيد العرش 27 الفاخر -->
     <div>
         <div class="throne-badge">
             <i class="fa-solid fa-crown text-warning fs-5"></i>
@@ -269,7 +269,7 @@
             </button>
             <!-- Admin Logout Button -->
             <button id="logoutBtn" class="btn btn-dark btn-sm rounded-pill px-3 shadow-sm admin-only" onclick="logoutAdmin()">
-                <i class="fa-solid fa-right-from-bracket text-warning me-1"></i> خروج المسؤول
+                <i class="fa-solid fa-right-from-bracket text-warning me-1"></i> خروج المسؤول <span id="currentAdminName" class="badge bg-warning text-dark ms-1"></span>
             </button>
         </div>
 
@@ -336,7 +336,7 @@
                 <form onsubmit="loginAdmin(event)">
                     <div class="mb-3">
                         <label class="form-label fw-bold small">اسم المستخدم (Username)</label>
-                        <input type="text" id="adminUser" class="form-control" required placeholder="أدخل اسم المستخدم">
+                        <input type="text" id="adminUser" class="form-control" required placeholder="أدخل اسم المستخدم (jihad / rodaina)">
                     </div>
                     <div class="mb-3">
                         <label class="form-label fw-bold small">كلمة السر (Password)</label>
@@ -400,9 +400,12 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    // Config Login Credentials
-    const ADMIN_USER = "jihad";
-    const ADMIN_PASS = "morocco2026";
+    // Config Login Credentials (قائمة المسؤولين المسموح لهم)
+    const ADMIN_ACCOUNTS = [
+        { user: "jihad", pass: "morocco2026", name: "جهاد ال وردي" },
+        { user: "rodaina", pass: "morocco2026", name: "ردينة الرنشي" },
+        { user: "ردينة", pass: "morocco2026", name: "ردينة الرنشي" }
+    ];
 
     let guestsData = [];
     let seatMap = {};
@@ -414,8 +417,9 @@
         bsLoginModal = new bootstrap.Modal(document.getElementById('loginModal'));
 
         // Check stored login state
-        if (sessionStorage.getItem('isAdmin') === 'true') {
-            enableAdminMode();
+        const storedAdmin = sessionStorage.getItem('adminName');
+        if (storedAdmin) {
+            enableAdminMode(storedAdmin);
         }
 
         loadExcel('جدول الحضور-1.xlsx')
@@ -433,12 +437,14 @@
 
     function loginAdmin(e) {
         e.preventDefault();
-        const user = document.getElementById('adminUser').value.trim();
+        const user = document.getElementById('adminUser').value.trim().toLowerCase();
         const pass = document.getElementById('adminPass').value.trim();
 
-        if (user === ADMIN_USER && pass === ADMIN_PASS) {
-            sessionStorage.setItem('isAdmin', 'true');
-            enableAdminMode();
+        const account = ADMIN_ACCOUNTS.find(acc => acc.user.toLowerCase() === user && acc.pass === pass);
+
+        if (account) {
+            sessionStorage.setItem('adminName', account.name);
+            enableAdminMode(account.name);
             bsLoginModal.hide();
             document.getElementById('loginError').style.display = 'none';
         } else {
@@ -446,18 +452,19 @@
         }
     }
 
-    function enableAdminMode() {
+    function enableAdminMode(adminDisplayName) {
         isAdminLoggedIn = true;
         document.getElementById('bodyTag').classList.add('is-admin');
         document.getElementById('loginBtn').style.display = 'none';
         document.getElementById('logoutBtn').style.display = 'inline-block';
+        document.getElementById('currentAdminName').innerText = adminDisplayName || '';
         renderCards(guestsData);
         if (document.getElementById('seatInput').value) checkSeat();
     }
 
     function logoutAdmin() {
         isAdminLoggedIn = false;
-        sessionStorage.removeItem('isAdmin');
+        sessionStorage.removeItem('adminName');
         document.getElementById('bodyTag').classList.remove('is-admin');
         document.getElementById('loginBtn').style.display = 'inline-block';
         document.getElementById('logoutBtn').style.display = 'none';
