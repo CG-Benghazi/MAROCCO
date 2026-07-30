@@ -16,7 +16,6 @@
     <style>
         :root {
             --morocco-red: #d61837;
-            --morocco-red-bright: #e62445;
             --morocco-green: #006233;
             --morocco-gold: #d4af37;
             --morocco-gold-light: #fbe8a6;
@@ -399,7 +398,7 @@
     let seatMap = {};
     let bsEditModal, bsLoginModal;
     let isAdminLoggedIn = false;
-    let currentView = 'all'; // 'all' or 'empty'
+    let currentView = 'all';
 
     window.addEventListener('DOMContentLoaded', () => {
         bsEditModal = new bootstrap.Modal(document.getElementById('editModal'));
@@ -415,7 +414,7 @@
                     <div class="card p-4 text-center border-danger">
                         <i class="fa-solid fa-triangle-exclamation text-danger fs-1 mb-2"></i>
                         <h6 class="fw-bold text-danger">تعذر تحميل جدول البيانات</h6>
-                        <p class="text-muted small mb-0">تأكد من وجود ملف 'جدول الحضور.xlsx' داخل المستودع.</p>
+                        <p class="text-muted small mb-0">تأكد من رفع ملف 'جدول الحضور-1.xlsx' داخل المستودع.</p>
                     </div>`;
             });
     });
@@ -476,16 +475,25 @@
             const col3 = row[3] ? String(row[3]).trim() : '';
             const col4 = row[4] ? String(row[4]).trim() : '';
 
+            // التعرف على اسم الصف
             if (col2.includes('الصف') && !col3 && !col4) {
                 currentSection = col2;
                 continue;
             }
 
-            if (col4 && !isNaN(col4) && col3 && col3 !== 'الاسم') {
+            // قراءة المقاعد والأسماء
+            if (col4 && !isNaN(col4) && col3 !== 'الاسم') {
                 const seatNum = parseInt(col4);
-                const guest = { seat: seatNum, section: currentSection, name: col3, title: col2 };
-                guestsData.push(guest);
-                seatMap[seatNum] = guest;
+                const guestName = col3;
+                
+                // التثبت من خلو المقعد أو كتابة كلمة (فارغ)
+                const isEmptySeat = !guestName || guestName === 'فارغ' || guestName === '(فارغ)' || guestName === 'شاغر';
+
+                if (!isEmptySeat) {
+                    const guest = { seat: seatNum, section: currentSection, name: guestName, title: col2 };
+                    guestsData.push(guest);
+                    seatMap[seatNum] = guest;
+                }
             }
         }
 
