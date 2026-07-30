@@ -8,9 +8,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts (Cairo & Tajawal) -->
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <!-- SheetJS Library for Excel parsing -->
+    <!-- SheetJS Library -->
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
     <style>
@@ -19,7 +19,6 @@
             --morocco-red-dark: #8b0000;
             --morocco-green: #006233;
             --morocco-gold: #d4af37;
-            --morocco-gold-light: #fff4d0;
             --bg-light: #f8fafc;
         }
 
@@ -27,10 +26,9 @@
             background-color: var(--bg-light); 
             font-family: 'Cairo', sans-serif;
             -webkit-tap-highlight-color: transparent;
-            padding-bottom: 30px;
+            padding-bottom: 40px;
         }
 
-        /* Top Royal Header */
         .royal-header {
             background: linear-gradient(135deg, #a60c25 0%, #c8102e 50%, #7a0619 100%);
             color: #ffffff;
@@ -42,7 +40,6 @@
             border-bottom: 4px solid var(--morocco-gold);
         }
 
-        /* Moroccan Pattern Overlay */
         .royal-header::before {
             content: "";
             position: absolute;
@@ -54,40 +51,36 @@
         }
 
         .coat-of-arms {
-            width: 85px;
+            width: 80px;
             height: auto;
             filter: drop-shadow(0px 4px 8px rgba(0,0,0,0.4));
             margin-bottom: 8px;
         }
 
         .header-title {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 800;
-            letter-spacing: -0.2px;
             color: #ffffff;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
         .header-subtitle {
-            font-size: 0.95rem;
-            color: var(--morocco-gold-light);
+            font-size: 0.9rem;
+            color: #fff4d0;
             font-weight: 600;
         }
 
         .engineer-badge {
             background: rgba(0, 0, 0, 0.35);
             border: 1px solid var(--morocco-gold);
-            padding: 6px 16px;
+            padding: 5px 14px;
             border-radius: 50px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #ffe89a;
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            backdrop-filter: blur(4px);
         }
 
-        /* Search Box Mobile Styling */
         .search-card {
             border: none;
             border-radius: 18px;
@@ -96,48 +89,25 @@
             margin-top: -15px;
         }
 
-        .form-control-lg {
-            font-size: 1rem;
-            padding: 12px 16px;
+        .form-control-lg, .form-select {
+            font-size: 0.95rem;
             border-radius: 12px;
-            border: 1.5px solid #e2e8f0;
-            background-color: #f8fafc;
         }
 
-        .form-control-lg:focus {
-            background-color: #ffffff;
-            border-color: var(--morocco-red);
-            box-shadow: 0 0 0 4px rgba(200, 16, 46, 0.12);
-        }
-
-        .input-group-text {
-            border-radius: 12px;
-            background-color: #f8fafc;
-            border: 1.5px solid #e2e8f0;
-        }
-
-        /* Mobile Guest Card */
         .guest-card {
             background: #ffffff;
             border-radius: 14px;
             border: 1px solid #edf2f7;
-            padding: 14px 16px;
+            padding: 12px 14px;
             margin-bottom: 10px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
-            position: relative;
-        }
-
-        .guest-card:active {
-            transform: scale(0.98);
-            background-color: #fdf2f4;
         }
 
         .seat-number-box {
             background: linear-gradient(135deg, var(--morocco-red) 0%, var(--morocco-red-dark) 100%);
             color: white;
-            min-width: 52px;
-            height: 52px;
+            min-width: 50px;
+            height: 50px;
             border-radius: 12px;
             display: flex;
             flex-direction: column;
@@ -147,13 +117,13 @@
         }
 
         .seat-number-box .num {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 800;
             line-height: 1;
         }
 
         .seat-number-box .lbl {
-            font-size: 0.65rem;
+            font-size: 0.6rem;
             opacity: 0.85;
         }
 
@@ -162,43 +132,30 @@
             color: var(--morocco-green);
             font-size: 0.75rem;
             font-weight: 700;
-            padding: 3px 10px;
+            padding: 2px 8px;
             border-radius: 20px;
-            border: 1px solid rgba(0, 98, 51, 0.2);
         }
 
         .guest-name {
-            font-size: 1.05rem;
+            font-size: 1rem;
             font-weight: 700;
             color: #1e293b;
-            margin-bottom: 2px;
         }
 
         .guest-title {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #64748b;
-            line-height: 1.3;
         }
 
-        /* Status Result Box */
         .status-box {
             border-radius: 16px;
             padding: 16px;
-            animation: fadeIn 0.3s ease;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-8px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .clear-btn {
-            cursor: pointer;
-            color: #94a3b8;
-        }
-
-        .clear-btn:hover {
-            color: var(--morocco-red);
+        .action-btn {
+            border-radius: 10px;
+            padding: 4px 10px;
+            font-size: 0.8rem;
         }
     </style>
 </head>
@@ -208,7 +165,7 @@
 <div class="royal-header text-center">
     <img src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Coat_of_arms_of_Morocco.svg" alt="شعار المملكة المغربية" class="coat-of-arms">
     <div class="header-title">القنصلية العامة للمملكة المغربية ببنغازي</div>
-    <div class="header-subtitle mt-1 mb-2">منظومة الاستعلام عن مقاعد حفل عيد العرش الـ 27</div>
+    <div class="header-subtitle mt-1 mb-2">منظومة إدارية واستعلام عن مقاعد حفل عيد العرش الـ 27</div>
     <div>
         <span class="engineer-badge">
             <i class="fa-solid fa-user-gear text-warning"></i>
@@ -218,6 +175,16 @@
 </div>
 
 <div class="container px-3">
+    <!-- Controls Header Bar -->
+    <div class="d-flex gap-2 justify-content-between my-3">
+        <button class="btn btn-dark btn-sm rounded-pill px-3 shadow-sm" data-bs-toggle="modal" data-bs-target="#editModal" onclick="prepareAddModal()">
+            <i class="fa-solid fa-plus text-warning me-1"></i> إضافة / تعديل مقعد
+        </button>
+        <button class="btn btn-outline-success btn-sm rounded-pill px-3 shadow-sm bg-white" onclick="exportToExcel()">
+            <i class="fa-solid fa-file-excel text-success me-1"></i> تصدير Excel
+        </button>
+    </div>
+
     <!-- Search Inputs Card -->
     <div class="card search-card p-3 mb-3">
         <!-- Search by Name -->
@@ -233,7 +200,7 @@
         <div>
             <label for="seatInput" class="form-label fw-bold small text-secondary">🪑 فحص رقم الكرسي (شاغر / مشغول):</label>
             <div class="input-group">
-                <input type="number" id="seatInput" class="form-control form-control-lg" placeholder="أدخل رقم الكرسي (مثلاً: 5)..." oninput="checkSeat()">
+                <input type="number" id="seatInput" class="form-control form-control-lg" placeholder="أدخل رقم الكرسي..." oninput="checkSeat()">
                 <button class="btn btn-outline-secondary px-3" type="button" onclick="clearSearch('seatInput')"><i class="fa-solid fa-xmark"></i></button>
             </div>
         </div>
@@ -244,11 +211,11 @@
 
     <!-- Results Count Bar -->
     <div class="d-flex align-items-center justify-content-between mb-2 px-1">
-        <span class="fw-bold text-dark small"><i class="fa-solid fa-users me-1 text-danger"></i> قائمة الحضور</span>
+        <span class="fw-bold text-dark small"><i class="fa-solid fa-users me-1 text-danger"></i> قائمة الحضور المسجلة</span>
         <span class="badge bg-dark rounded-pill px-3 py-2" id="totalCount">0 ضيف</span>
     </div>
 
-    <!-- Guests Cards Container (Mobile Friendly) -->
+    <!-- Guests Cards Container -->
     <div id="cardsContainer">
         <div class="text-center py-5">
             <div class="spinner-border text-danger mb-2" role="status"></div>
@@ -257,12 +224,60 @@
     </div>
 </div>
 
+<!-- Modal: Add / Edit Seat -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+            <div class="modal-header bg-danger text-white border-0 rounded-top-4">
+                <h6 class="modal-title fw-bold" id="modalTitle"><i class="fa-solid fa-pen-to-square me-2"></i>إضافة / تعديل مقعد</h6>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-4">
+                <form id="seatForm" onsubmit="saveSeat(event)">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold small">رقم الكرسي *</label>
+                        <input type="number" id="modalSeatNum" class="form-control" required placeholder="مثلاً: 12">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold small">الصف / الموقع *</label>
+                        <select id="modalSection" class="form-select" required>
+                            <option value="الصف الأول">الصف الأول</option>
+                            <option value="الصف الثاني">الصف الثاني</option>
+                            <option value="الصف الثالث">الصف الثالث</option>
+                            <option value="الصف الرابع">الصف الرابع</option>
+                            <option value="الصف الخامس">الصف الخامس</option>
+                            <option value="الصف السادس">الصف السادس</option>
+                            <option value="الصف السابع">الصف السابع</option>
+                            <option value="الصف الثامن">الصف الثامن</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold small">اسم الضيف *</label>
+                        <input type="text" id="modalName" class="form-control" required placeholder="الاسم الكامل للضيف">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold small">الصفة الرسمية</label>
+                        <input type="text" id="modalTitleRole" class="form-control" placeholder="الصفة الوظيفية أو المكانة">
+                    </div>
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-danger fw-bold rounded-3 py-2">حفظ التغييرات</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap Bundle JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
     let guestsData = [];
     let seatMap = {};
+    let bsModal;
 
-    // Auto-load Excel file with fallback
     window.addEventListener('DOMContentLoaded', () => {
+        bsModal = new bootstrap.Modal(document.getElementById('editModal'));
         loadExcel('جدول الحضور-1.xlsx')
             .catch(() => loadExcel('جدول الحضور.xlsx'))
             .catch(err => {
@@ -271,7 +286,7 @@
                     <div class="card p-4 text-center border-danger">
                         <i class="fa-solid fa-triangle-exclamation text-danger fs-1 mb-2"></i>
                         <h6 class="fw-bold text-danger">تعذر تحميل جدول البيانات</h6>
-                        <p class="text-muted small mb-0">تأكد من وجود ملف <strong>'جدول الحضور.xlsx'</strong> داخل المستودع على GitHub.</p>
+                        <p class="text-muted small mb-0">تأكد من وجود ملف <strong>'جدول الحضور.xlsx'</strong> داخل المستودع.</p>
                     </div>`;
             });
     });
@@ -304,7 +319,6 @@
             const col3 = row[3] ? String(row[3]).trim() : '';
             const col4 = row[4] ? String(row[4]).trim() : '';
 
-            // Detect row section titles
             if (col2.includes('الصف') && !col3 && !col4) {
                 currentSection = col2;
                 continue;
@@ -323,6 +337,17 @@
             }
         }
 
+        updateUI();
+    }
+
+    function updateUI() {
+        // Re-build seatMap
+        seatMap = {};
+        guestsData.forEach(g => seatMap[g.seat] = g);
+        
+        // Sort by seat number
+        guestsData.sort((a, b) => a.seat - b.seat);
+
         document.getElementById('totalCount').innerText = `${guestsData.length} ضيف`;
         renderCards(guestsData);
     }
@@ -333,7 +358,7 @@
             container.innerHTML = `
                 <div class="card p-4 text-center text-muted my-3">
                     <i class="fa-solid fa-magnifying-glass fs-2 mb-2 text-secondary"></i>
-                    <span>لا توجد نتائج مطابقة للبحث</span>
+                    <span>لا توجد نتائج مطابقة</span>
                 </div>`;
             return;
         }
@@ -347,6 +372,10 @@
                 <div class="flex-grow-1 overflow-hidden">
                     <div class="d-flex align-items-center justify-content-between mb-1">
                         <span class="section-tag">${item.section}</span>
+                        <div>
+                            <button class="btn btn-light text-primary action-btn p-1 px-2" onclick="editSeatModal(${item.seat})"><i class="fa-solid fa-pen"></i></button>
+                            <button class="btn btn-light text-danger action-btn p-1 px-2" onclick="deleteSeat(${item.seat})"><i class="fa-solid fa-trash"></i></button>
+                        </div>
                     </div>
                     <div class="guest-name text-truncate">${item.name}</div>
                     <div class="guest-title text-truncate">${item.title || 'ضيف كريم'}</div>
@@ -387,9 +416,12 @@
             const guest = seatMap[seatNum];
             resultDiv.className = "status-box bg-danger text-white shadow-sm";
             resultDiv.innerHTML = `
-                <div class="d-flex align-items-center gap-2 mb-2">
-                    <i class="fa-solid fa-circle-xmark fs-3 text-warning"></i>
-                    <h6 class="mb-0 fw-bold">الكرسي رقم (${seatNum}) : <span class="badge bg-warning text-dark">مشغــــول</span></h6>
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-circle-xmark fs-3 text-warning"></i>
+                        <h6 class="mb-0 fw-bold">الكرسي رقم (${seatNum}) : <span class="badge bg-warning text-dark">مشغــــول</span></h6>
+                    </div>
+                    <button class="btn btn-light btn-sm text-dark fw-bold rounded-pill" onclick="editSeatModal(${seatNum})">تعديل المقعد</button>
                 </div>
                 <div class="bg-black bg-opacity-25 p-2 rounded-3 small">
                     <div><strong>الاسم:</strong> ${guest.name}</div>
@@ -401,12 +433,15 @@
         } else {
             resultDiv.className = "status-box bg-success text-white shadow-sm";
             resultDiv.innerHTML = `
-                <div class="d-flex align-items-center gap-2">
-                    <i class="fa-solid fa-circle-check fs-3"></i>
-                    <div>
-                        <h6 class="mb-0 fw-bold">الكرسي رقم (${seatNum}) : شــــاغر (فاضي)</h6>
-                        <span class="small opacity-75">المقعد متاح ولا يوجد ضيف محجوز عليه.</span>
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-circle-check fs-3"></i>
+                        <div>
+                            <h6 class="mb-0 fw-bold">الكرسي رقم (${seatNum}) : شــــاغر (فاضي)</h6>
+                            <span class="small opacity-75">يمكنك حجز هذا المقعد وتسكين ضيف فيه.</span>
+                        </div>
                     </div>
+                    <button class="btn btn-light btn-sm text-success fw-bold rounded-pill ms-2" onclick="prepareAddModal(${seatNum})">حجز المقعد</button>
                 </div>
             `;
             renderCards([]);
@@ -414,10 +449,74 @@
         resultDiv.style.display = 'block';
     }
 
+    function prepareAddModal(presetSeatNum = '') {
+        document.getElementById('modalTitle').innerText = presetSeatNum ? `حجز المقعد رقم (${presetSeatNum})` : 'إضافة مقعد جديد';
+        document.getElementById('modalSeatNum').value = presetSeatNum;
+        document.getElementById('modalSeatNum').readOnly = false;
+        document.getElementById('modalName').value = '';
+        document.getElementById('modalTitleRole').value = '';
+        bsModal.show();
+    }
+
+    function editSeatModal(seatNum) {
+        const guest = seatMap[seatNum];
+        if (!guest) return;
+
+        document.getElementById('modalTitle').innerText = `تعديل بيانا المقعد رقم (${seatNum})`;
+        document.getElementById('modalSeatNum').value = guest.seat;
+        document.getElementById('modalSeatNum').readOnly = true;
+        document.getElementById('modalSection').value = guest.section || 'الصف الأول';
+        document.getElementById('modalName').value = guest.name;
+        document.getElementById('modalTitleRole').value = guest.title || '';
+        bsModal.show();
+    }
+
+    function saveSeat(event) {
+        event.preventDefault();
+        const seatNum = parseInt(document.getElementById('modalSeatNum').value);
+        const section = document.getElementById('modalSection').value;
+        const name = document.getElementById('modalName').value.trim();
+        const title = document.getElementById('modalTitleRole').value.trim();
+
+        if (seatMap[seatNum]) {
+            // Update existing
+            seatMap[seatNum].section = section;
+            seatMap[seatNum].name = name;
+            seatMap[seatNum].title = title;
+        } else {
+            // Add new
+            const newGuest = { seat: seatNum, section, name, title };
+            guestsData.push(newGuest);
+        }
+
+        updateUI();
+        bsModal.hide();
+        if (document.getElementById('seatInput').value) checkSeat();
+    }
+
+    function deleteSeat(seatNum) {
+        if (confirm(`هل أنت تأكد من إخلاء الكرسي رقم (${seatNum}) وتحويله لشاغر؟`)) {
+            guestsData = guestsData.filter(g => g.seat !== seatNum);
+            updateUI();
+            if (document.getElementById('seatInput').value) checkSeat();
+        }
+    }
+
     function clearSearch(inputId) {
         document.getElementById(inputId).value = '';
         if (inputId === 'searchInput') searchData();
         if (inputId === 'seatInput') checkSeat();
+    }
+
+    function exportToExcel() {
+        const exportArr = [["الصفه", "الاسم", "أرقام الجلوس"]];
+        guestsData.forEach(g => {
+            exportArr.push([g.title, g.name, g.seat]);
+        });
+        const ws = XLSX.utils.aoa_to_sheet(exportArr);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "جدول الحضور المحدث");
+        XLSX.writeFile(wb, "جدول_الحضور_المحدث.xlsx");
     }
 </script>
 
