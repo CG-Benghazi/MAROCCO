@@ -9,7 +9,7 @@
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Amiri:wght@700&display=swap" rel="stylesheet">
     <!-- SheetJS Library -->
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 
@@ -30,19 +30,18 @@
             padding-bottom: 40px;
         }
 
-        /* خلفية حمراء زاهية بنقش مغربي هندسي زاهي ولطيف */
+        /* خلفية حمراء زاهية بنقش مغربي هندسي ناصع */
         .royal-header {
             background: linear-gradient(135deg, #e6193c 0%, #c80d2e 50%, #d61837 100%);
             color: #ffffff;
-            border-radius: 0 0 24px 24px;
-            padding: 24px 16px 20px 16px;
+            border-radius: 0 0 28px 28px;
+            padding: 24px 16px 22px 16px;
             box-shadow: 0 8px 25px rgba(214, 24, 55, 0.25);
             position: relative;
             overflow: hidden;
             border-bottom: 4px solid var(--morocco-gold);
         }
 
-        /* نقش مغربي ذهبي ناعم وواضح (غير داكن) */
         .royal-header::before {
             content: "";
             position: absolute;
@@ -56,13 +55,52 @@
         }
 
         .coat-of-arms {
-            width: 85px;
+            width: 75px;
             height: auto;
-            max-height: 95px;
+            max-height: 85px;
             filter: drop-shadow(0px 3px 6px rgba(0, 0, 0, 0.25));
-            margin-bottom: 10px;
             position: relative;
             z-index: 2;
+        }
+
+        /* تصميم وسام شعار عيد العرش 27 الفاخر */
+        .throne-badge {
+            background: linear-gradient(135deg, #fff9e6 0%, #fbe8a6 100%);
+            border: 2px solid var(--morocco-gold);
+            border-radius: 50px;
+            padding: 6px 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), inset 0 0 8px rgba(212, 175, 55, 0.4);
+            position: relative;
+            z-index: 2;
+            margin-bottom: 12px;
+            transform: scale(1.02);
+        }
+
+        .throne-badge .throne-text {
+            color: #8b0000;
+            font-family: 'Amiri', serif;
+            font-weight: 700;
+            font-size: 1.15rem;
+            line-height: 1.1;
+            text-shadow: 0 1px 1px rgba(255,255,255,0.8);
+        }
+
+        .throne-badge .throne-num {
+            background: var(--morocco-red);
+            color: #ffffff;
+            font-weight: 900;
+            font-size: 1.1rem;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--morocco-gold);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         .header-title {
@@ -194,14 +232,25 @@
 
 <!-- Moroccan Royal Header -->
 <div class="royal-header text-center">
-    <!-- شعار المملكة المغربية مع معالجة الصورة -->
-    <img src="https://raw.githubusercontent.com/twitter/twemoji/master/assets/72x72/1f1f2-1f1e6.png" 
-         onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/d/d1/Coat_of_arms_of_Morocco.svg';"
-         alt="شعار المملكة المغربية" 
-         class="coat-of-arms">
-         
+    <!-- شعار المملكة المغربية -->
+    <div class="mb-2">
+        <img src="https://raw.githubusercontent.com/twitter/twemoji/master/assets/72x72/1f1f2-1f1e6.png" 
+             onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/d/d1/Coat_of_arms_of_Morocco.svg';"
+             alt="شعار المملكة المغربية" 
+             class="coat-of-arms">
+    </div>
+
+    <!-- وسام شعار عيد العرش 27 الخيالي -->
+    <div>
+        <div class="throne-badge">
+            <i class="fa-solid fa-crown text-warning fs-5"></i>
+            <span class="throne-text">ذكرى عيد العرش المجيد</span>
+            <span class="throne-num">27</span>
+        </div>
+    </div>
+
     <div class="header-title">القنصلية العامة للمملكة المغربية ببنغازي</div>
-    <div class="header-subtitle mt-1 mb-2">منظومة الاستعلام والإدارة لحفل عيد العرش الـ 27</div>
+    <div class="header-subtitle mt-1 mb-2">منظومة الاستعلام والإدارة لحفل الاستقبال الرسمي</div>
     <div>
         <span class="engineer-badge">
             <i class="fa-solid fa-user-gear text-warning"></i>
