@@ -30,7 +30,6 @@
             padding-bottom: 40px;
         }
 
-        /* خلفية حمراء زاهية بنقش مغربي هندسي ناصع */
         .royal-header {
             background: linear-gradient(135deg, #e6193c 0%, #c80d2e 50%, #d61837 100%);
             color: #ffffff;
@@ -63,7 +62,6 @@
             z-index: 2;
         }
 
-        /* تصميم وسام شعار عيد العرش 27 الفاخر */
         .throne-badge {
             background: linear-gradient(135deg, #fff9e6 0%, #fbe8a6 100%);
             border: 2px solid var(--morocco-gold);
@@ -124,9 +122,9 @@
             background: rgba(255, 255, 255, 0.18);
             backdrop-filter: blur(4px);
             border: 1px solid var(--morocco-gold-light);
-            padding: 5px 14px;
+            padding: 6px 16px;
             border-radius: 50px;
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             color: #ffffff;
             display: inline-flex;
             align-items: center;
@@ -146,11 +144,6 @@
             z-index: 3;
         }
 
-        .form-control-lg, .form-select {
-            font-size: 0.95rem;
-            border-radius: 12px;
-        }
-
         .guest-card {
             background: #ffffff;
             border-radius: 14px;
@@ -158,6 +151,14 @@
             padding: 12px 14px;
             margin-bottom: 10px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+
+        .empty-seat-card {
+            background: #f0fdf4;
+            border: 1.5px dashed #22c55e;
+            border-radius: 14px;
+            padding: 12px;
+            text-align: center;
         }
 
         .seat-number-box {
@@ -204,15 +205,11 @@
             color: #64748b;
         }
 
-        .status-box {
-            border-radius: 16px;
-            padding: 16px;
-        }
-
-        .action-btn {
-            border-radius: 10px;
-            padding: 4px 10px;
-            font-size: 0.8rem;
+        .filter-btn {
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            padding: 6px 14px;
         }
 
         .admin-only {
@@ -222,17 +219,12 @@
         .is-admin .admin-only {
             display: inline-block !important;
         }
-
-        .is-admin .admin-flex {
-            display: flex !important;
-        }
     </style>
 </head>
 <body id="bodyTag">
 
-<!-- Moroccan Royal Header -->
+<!-- Header -->
 <div class="royal-header text-center">
-    <!-- شعار المملكة المغربية -->
     <div class="mb-2">
         <img src="https://raw.githubusercontent.com/twitter/twemoji/master/assets/72x72/1f1f2-1f1e6.png" 
              onerror="this.onerror=null; this.src='https://upload.wikimedia.org/wikipedia/commons/d/d1/Coat_of_arms_of_Morocco.svg';"
@@ -240,7 +232,6 @@
              class="coat-of-arms">
     </div>
 
-    <!-- وسام شعار عيد العرش 27 الفاخر -->
     <div>
         <div class="throne-badge">
             <i class="fa-solid fa-crown text-warning fs-5"></i>
@@ -253,69 +244,72 @@
     <div class="header-subtitle mt-1 mb-2">منظومة الاستعلام والإدارة لحفل الاستقبال الرسمي</div>
     <div>
         <span class="engineer-badge">
-            <i class="fa-solid fa-user-gear text-warning"></i>
-            <span>إشراف المهندس: <strong>جهاد ال وردي</strong></span>
+            <i class="fa-solid fa-users-gear text-warning me-1"></i>
+            <span>إشراف: <strong>م. جهاد ال وردي</strong> & <strong>أ. ردينة الرنشي</strong></span>
         </span>
     </div>
 </div>
 
 <div class="container px-3">
-    <!-- Top Admin & Actions Bar -->
+    <!-- Admin & Controls -->
     <div class="d-flex gap-2 justify-content-between align-items-center my-3">
         <div>
-            <!-- Admin Login Button -->
             <button id="loginBtn" class="btn btn-outline-danger btn-sm rounded-pill px-3 shadow-sm bg-white" data-bs-toggle="modal" data-bs-target="#loginModal">
                 <i class="fa-solid fa-lock me-1"></i> دخول المسؤول
             </button>
-            <!-- Admin Logout Button -->
             <button id="logoutBtn" class="btn btn-dark btn-sm rounded-pill px-3 shadow-sm admin-only" onclick="logoutAdmin()">
-                <i class="fa-solid fa-right-from-bracket text-warning me-1"></i> خروج المسؤول <span id="currentAdminName" class="badge bg-warning text-dark ms-1"></span>
+                <i class="fa-solid fa-right-from-bracket text-warning me-1"></i> خروج <span id="currentAdminName" class="badge bg-warning text-dark ms-1"></span>
             </button>
         </div>
 
         <div class="d-flex gap-2">
-            <!-- Add Seat Button (Admin Only) -->
             <button class="btn btn-danger btn-sm rounded-pill px-3 shadow-sm admin-only" data-bs-toggle="modal" data-bs-target="#editModal" onclick="prepareAddModal()">
                 <i class="fa-solid fa-plus text-warning me-1"></i> إضافة مقعد
             </button>
-            <!-- Export Excel Button -->
             <button class="btn btn-outline-success btn-sm rounded-pill px-3 shadow-sm bg-white" onclick="exportToExcel()">
                 <i class="fa-solid fa-file-excel text-success me-1"></i> تصدير Excel
             </button>
         </div>
     </div>
 
-    <!-- Search Inputs Card -->
+    <!-- Search Inputs -->
     <div class="card search-card p-3 mb-3">
-        <!-- Search by Name -->
         <div class="mb-3">
             <label for="searchInput" class="form-label fw-bold small text-secondary">🔍 بحث باسم الضيف:</label>
             <div class="input-group">
-                <input type="text" id="searchInput" class="form-control form-control-lg" placeholder="اكتب اسم الضيف..." oninput="searchData()">
-                <button class="btn btn-outline-secondary px-3" type="button" onclick="clearSearch('searchInput')"><i class="fa-solid fa-xmark"></i></button>
+                <input type="text" id="searchInput" class="form-control" placeholder="اكتب اسم الضيف..." oninput="searchData()">
+                <button class="btn btn-outline-secondary" type="button" onclick="clearSearch('searchInput')"><i class="fa-solid fa-xmark"></i></button>
             </div>
         </div>
 
-        <!-- Search by Seat -->
         <div>
-            <label for="seatInput" class="form-label fw-bold small text-secondary">🪑 فحص رقم الكرسي (شاغر / مشغول):</label>
+            <label for="seatInput" class="form-label fw-bold small text-secondary">🪑 فحص رقم الكرسي:</label>
             <div class="input-group">
-                <input type="number" id="seatInput" class="form-control form-control-lg" placeholder="أدخل رقم الكرسي..." oninput="checkSeat()">
-                <button class="btn btn-outline-secondary px-3" type="button" onclick="clearSearch('seatInput')"><i class="fa-solid fa-xmark"></i></button>
+                <input type="number" id="seatInput" class="form-control" placeholder="أدخل رقم الكرسي..." oninput="checkSeat()">
+                <button class="btn btn-outline-secondary" type="button" onclick="clearSearch('seatInput')"><i class="fa-solid fa-xmark"></i></button>
             </div>
         </div>
     </div>
 
-    <!-- Seat Status Result -->
-    <div id="seatStatusResult" class="mb-3" style="display: none;"></div>
+    <!-- Quick Filter Tabs -->
+    <div class="d-flex gap-2 mb-3">
+        <button id="btnAll" class="btn btn-danger filter-btn flex-fill active" onclick="showAllGuests()">
+            <i class="fa-solid fa-users me-1"></i> كافة الضيوف
+        </button>
+        <button id="btnEmpty" class="btn btn-outline-success filter-btn flex-fill bg-white" onclick="showEmptySeats()">
+            <i class="fa-solid fa-chair me-1"></i> المقاعد الشاغرة (الفارغة)
+        </button>
+    </div>
 
     <!-- Results Count Bar -->
     <div class="d-flex align-items-center justify-content-between mb-2 px-1">
-        <span class="fw-bold text-dark small"><i class="fa-solid fa-users me-1 text-danger"></i> قائمة الحضور المسجلة</span>
+        <span class="fw-bold text-dark small" id="listTitle"><i class="fa-solid fa-users me-1 text-danger"></i> قائمة الحضور المسجلة</span>
         <span class="badge bg-dark rounded-pill px-3 py-2" id="totalCount">0 ضيف</span>
     </div>
 
-    <!-- Guests Cards Container -->
+    <div id="seatStatusResult" class="mb-3" style="display: none;"></div>
+
+    <!-- Container for Cards / Empty Seats -->
     <div id="cardsContainer">
         <div class="text-center py-5">
             <div class="spinner-border text-danger mb-2" role="status"></div>
@@ -330,35 +324,33 @@
         <div class="modal-content border-0 shadow-lg rounded-4">
             <div class="modal-header bg-dark text-white border-0 rounded-top-4">
                 <h6 class="modal-title fw-bold"><i class="fa-solid fa-user-shield text-warning me-2"></i>تسجيل دخول المسؤول</h6>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body p-4">
                 <form onsubmit="loginAdmin(event)">
                     <div class="mb-3">
-                        <label class="form-label fw-bold small">اسم المستخدم (Username)</label>
-                        <input type="text" id="adminUser" class="form-control" required placeholder="أدخل اسم المستخدم (jihad / rodaina)">
+                        <label class="form-label fw-bold small">اسم المستخدم</label>
+                        <input type="text" id="adminUser" class="form-control" required placeholder="(jihad / rodaina)">
                     </div>
                     <div class="mb-3">
-                        <label class="form-label fw-bold small">كلمة السر (Password)</label>
+                        <label class="form-label fw-bold small">كلمة السر</label>
                         <input type="password" id="adminPass" class="form-control" required placeholder="أدخل كلمة السر">
                     </div>
                     <div id="loginError" class="text-danger small mb-3" style="display: none;">اسم المستخدم أو كلمة السر غير صحيحة!</div>
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-danger fw-bold rounded-3 py-2">تسجيل الدخول</button>
-                    </div>
+                    <button type="submit" class="btn btn-danger w-100 fw-bold rounded-3 py-2">تسجيل الدخول</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Modal: Add / Edit Seat -->
+<!-- Modal: Edit / Add Seat -->
 <div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow-lg rounded-4">
             <div class="modal-header bg-danger text-white border-0 rounded-top-4">
                 <h6 class="modal-title fw-bold" id="modalTitle"><i class="fa-solid fa-pen-to-square me-2"></i>إضافة / تعديل مقعد</h6>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body p-4">
                 <form id="seatForm" onsubmit="saveSeat(event)">
@@ -385,22 +377,18 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label fw-bold small">الصفة الرسمية</label>
-                        <input type="text" id="modalTitleRole" class="form-control" placeholder="الصفة الوظيفية أو المكانة">
+                        <input type="text" id="modalTitleRole" class="form-control" placeholder="الصفة الوظيفية">
                     </div>
-                    <div class="d-grid gap-2 mt-4">
-                        <button type="submit" class="btn btn-danger fw-bold rounded-3 py-2">حفظ التغييرات</button>
-                    </div>
+                    <button type="submit" class="btn btn-danger w-100 fw-bold rounded-3 py-2 mt-3">حفظ التغييرات</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-<!-- Bootstrap Bundle JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    // Config Login Credentials (قائمة المسؤولين المسموح لهم)
     const ADMIN_ACCOUNTS = [
         { user: "jihad", pass: "morocco2026", name: "جهاد ال وردي" },
         { user: "rodaina", pass: "morocco2026", name: "ردينة الرنشي" },
@@ -411,26 +399,23 @@
     let seatMap = {};
     let bsEditModal, bsLoginModal;
     let isAdminLoggedIn = false;
+    let currentView = 'all'; // 'all' or 'empty'
 
     window.addEventListener('DOMContentLoaded', () => {
         bsEditModal = new bootstrap.Modal(document.getElementById('editModal'));
         bsLoginModal = new bootstrap.Modal(document.getElementById('loginModal'));
 
-        // Check stored login state
         const storedAdmin = sessionStorage.getItem('adminName');
-        if (storedAdmin) {
-            enableAdminMode(storedAdmin);
-        }
+        if (storedAdmin) enableAdminMode(storedAdmin);
 
         loadExcel('جدول الحضور-1.xlsx')
             .catch(() => loadExcel('جدول الحضور.xlsx'))
             .catch(err => {
-                console.error(err);
                 document.getElementById('cardsContainer').innerHTML = `
                     <div class="card p-4 text-center border-danger">
                         <i class="fa-solid fa-triangle-exclamation text-danger fs-1 mb-2"></i>
                         <h6 class="fw-bold text-danger">تعذر تحميل جدول البيانات</h6>
-                        <p class="text-muted small mb-0">تأكد من وجود ملف <strong>'جدول الحضور.xlsx'</strong> داخل المستودع.</p>
+                        <p class="text-muted small mb-0">تأكد من وجود ملف 'جدول الحضور.xlsx' داخل المستودع.</p>
                     </div>`;
             });
     });
@@ -439,14 +424,12 @@
         e.preventDefault();
         const user = document.getElementById('adminUser').value.trim().toLowerCase();
         const pass = document.getElementById('adminPass').value.trim();
-
         const account = ADMIN_ACCOUNTS.find(acc => acc.user.toLowerCase() === user && acc.pass === pass);
 
         if (account) {
             sessionStorage.setItem('adminName', account.name);
             enableAdminMode(account.name);
             bsLoginModal.hide();
-            document.getElementById('loginError').style.display = 'none';
         } else {
             document.getElementById('loginError').style.display = 'block';
         }
@@ -458,8 +441,7 @@
         document.getElementById('loginBtn').style.display = 'none';
         document.getElementById('logoutBtn').style.display = 'inline-block';
         document.getElementById('currentAdminName').innerText = adminDisplayName || '';
-        renderCards(guestsData);
-        if (document.getElementById('seatInput').value) checkSeat();
+        refreshCurrentView();
     }
 
     function logoutAdmin() {
@@ -468,22 +450,16 @@
         document.getElementById('bodyTag').classList.remove('is-admin');
         document.getElementById('loginBtn').style.display = 'inline-block';
         document.getElementById('logoutBtn').style.display = 'none';
-        renderCards(guestsData);
-        if (document.getElementById('seatInput').value) checkSeat();
+        refreshCurrentView();
     }
 
     function loadExcel(filename) {
         return fetch(filename)
-            .then(res => {
-                if (!res.ok) throw new Error('File not found: ' + filename);
-                return res.arrayBuffer();
-            })
+            .then(res => res.arrayBuffer())
             .then(buffer => {
                 const workbook = XLSX.read(buffer, { type: 'array' });
-                const sheetName = workbook.SheetNames[0];
-                const sheet = workbook.Sheets[sheetName];
-                const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
-                processData(jsonData);
+                const sheet = workbook.Sheets[workbook.SheetNames[0]];
+                processData(XLSX.utils.sheet_to_json(sheet, { header: 1 }));
             });
     }
 
@@ -507,26 +483,55 @@
 
             if (col4 && !isNaN(col4) && col3 && col3 !== 'الاسم') {
                 const seatNum = parseInt(col4);
-                const guest = {
-                    seat: seatNum,
-                    section: currentSection,
-                    name: col3,
-                    title: col2
-                };
+                const guest = { seat: seatNum, section: currentSection, name: col3, title: col2 };
                 guestsData.push(guest);
                 seatMap[seatNum] = guest;
             }
         }
 
-        updateUI();
+        refreshCurrentView();
     }
 
-    function updateUI() {
+    function refreshCurrentView() {
         seatMap = {};
         guestsData.forEach(g => seatMap[g.seat] = g);
         guestsData.sort((a, b) => a.seat - b.seat);
+
+        if (currentView === 'empty') {
+            showEmptySeats();
+        } else {
+            showAllGuests();
+        }
+    }
+
+    function showAllGuests() {
+        currentView = 'all';
+        document.getElementById('btnAll').className = "btn btn-danger filter-btn flex-fill active";
+        document.getElementById('btnEmpty').className = "btn btn-outline-success filter-btn flex-fill bg-white";
+        document.getElementById('listTitle').innerHTML = '<i class="fa-solid fa-users me-1 text-danger"></i> قائمة الحضور المسجلة';
         document.getElementById('totalCount').innerText = `${guestsData.length} ضيف`;
         renderCards(guestsData);
+    }
+
+    function showEmptySeats() {
+        currentView = 'empty';
+        document.getElementById('btnAll').className = "btn btn-outline-danger filter-btn flex-fill bg-white";
+        document.getElementById('btnEmpty').className = "btn btn-success filter-btn flex-fill active";
+        document.getElementById('listTitle').innerHTML = '<i class="fa-solid fa-chair me-1 text-success"></i> المقاعد الشاغرة (الفارغة)';
+
+        if (guestsData.length === 0) {
+            renderCards([]);
+            return;
+        }
+
+        const maxSeat = Math.max(...guestsData.map(g => g.seat));
+        const emptySeats = [];
+        for (let i = 1; i <= maxSeat; i++) {
+            if (!seatMap[i]) emptySeats.push(i);
+        }
+
+        document.getElementById('totalCount').innerText = `${emptySeats.length} كرسي شاغر`;
+        renderEmptySeatsGrid(emptySeats);
     }
 
     function renderCards(data) {
@@ -561,19 +566,40 @@
         `).join('');
     }
 
-    function searchData() {
-        document.getElementById('seatInput').value = '';
-        document.getElementById('seatStatusResult').style.display = 'none';
-
-        const query = document.getElementById('searchInput').value.trim().toLowerCase();
-        if (!query) {
-            renderCards(guestsData);
+    function renderEmptySeatsGrid(emptySeats) {
+        const container = document.getElementById('cardsContainer');
+        if (emptySeats.length === 0) {
+            container.innerHTML = `
+                <div class="card p-4 text-center text-success bg-light my-3 border-success">
+                    <i class="fa-solid fa-circle-check fs-1 mb-2"></i>
+                    <h6 class="fw-bold mb-0">جميع المقاعد محجوزة حالياً!</h6>
+                </div>`;
             return;
         }
 
+        let html = '<div class="row g-2">';
+        emptySeats.forEach(seat => {
+            html += `
+                <div class="col-6 col-sm-4 col-md-3">
+                    <div class="empty-seat-card">
+                        <div class="fw-bold text-success fs-5 mb-1"><i class="fa-solid fa-chair me-1"></i> ${seat}</div>
+                        <div class="small text-muted mb-2">مقعد شاغر</div>
+                        ${isAdminLoggedIn ? `<button class="btn btn-sm btn-success w-100 rounded-pill fw-bold" onclick="prepareAddModal(${seat})">حجز المقعد</button>` : ''}
+                    </div>
+                </div>`;
+        });
+        html += '</div>';
+        container.innerHTML = html;
+    }
+
+    function searchData() {
+        document.getElementById('seatInput').value = '';
+        document.getElementById('seatStatusResult').style.display = 'none';
+        const query = document.getElementById('searchInput').value.trim().toLowerCase();
+        if (!query) { refreshCurrentView(); return; }
+
         const filtered = guestsData.filter(g => 
-            g.name.toLowerCase().includes(query) || 
-            (g.title && g.title.toLowerCase().includes(query))
+            g.name.toLowerCase().includes(query) || (g.title && g.title.toLowerCase().includes(query))
         );
         renderCards(filtered);
     }
@@ -585,42 +611,26 @@
 
         if (isNaN(seatNum)) {
             resultDiv.style.display = 'none';
-            renderCards(guestsData);
+            refreshCurrentView();
             return;
         }
 
         if (seatMap[seatNum]) {
             const guest = seatMap[seatNum];
-            resultDiv.className = "status-box bg-danger text-white shadow-sm";
-            resultDiv.innerHTML = `
-                <div class="d-flex align-items-center justify-content-between mb-2">
-                    <div class="d-flex align-items-center gap-2">
-                        <i class="fa-solid fa-circle-xmark fs-3 text-warning"></i>
-                        <h6 class="mb-0 fw-bold">الكرسي رقم (${seatNum}) : <span class="badge bg-warning text-dark">مشغــــول</span></h6>
-                    </div>
-                    ${isAdminLoggedIn ? `<button class="btn btn-light btn-sm text-dark fw-bold rounded-pill" onclick="editSeatModal(${seatNum})">تعديل المقعد</button>` : ''}
-                </div>
-                <div class="bg-black bg-opacity-25 p-2 rounded-3 small">
-                    <div><strong>الاسم:</strong> ${guest.name}</div>
-                    <div><strong>الصفة:</strong> ${guest.title || '-'}</div>
-                    <div><strong>الموقع:</strong> ${guest.section}</div>
-                </div>
-            `;
-            renderCards([guest]);
-        } else {
-            resultDiv.className = "status-box bg-success text-white shadow-sm";
+            resultDiv.className = "p-3 rounded-3 bg-danger text-white mb-3 shadow-sm";
             resultDiv.innerHTML = `
                 <div class="d-flex align-items-center justify-content-between">
-                    <div class="d-flex align-items-center gap-2">
-                        <i class="fa-solid fa-circle-check fs-3"></i>
-                        <div>
-                            <h6 class="mb-0 fw-bold">الكرسي رقم (${seatNum}) : شــــاغر (فاضي)</h6>
-                            <span class="small opacity-75">المقعد متاح للضيوف.</span>
-                        </div>
-                    </div>
-                    ${isAdminLoggedIn ? `<button class="btn btn-light btn-sm text-success fw-bold rounded-pill ms-2" onclick="prepareAddModal(${seatNum})">حجز المقعد</button>` : ''}
-                </div>
-            `;
+                    <div><strong>الكرسي (${seatNum}):</strong> مشغول باسم الضيف (${guest.name})</div>
+                    ${isAdminLoggedIn ? `<button class="btn btn-light btn-sm text-dark fw-bold rounded-pill" onclick="editSeatModal(${seatNum})">تعديل</button>` : ''}
+                </div>`;
+            renderCards([guest]);
+        } else {
+            resultDiv.className = "p-3 rounded-3 bg-success text-white mb-3 shadow-sm";
+            resultDiv.innerHTML = `
+                <div class="d-flex align-items-center justify-content-between">
+                    <div><strong>الكرسي (${seatNum}):</strong> شــــاغر (متاح للحجز)</div>
+                    ${isAdminLoggedIn ? `<button class="btn btn-light btn-sm text-success fw-bold rounded-pill" onclick="prepareAddModal(${seatNum})">حجز الكرسي</button>` : ''}
+                </div>`;
             renderCards([]);
         }
         resultDiv.style.display = 'block';
@@ -630,7 +640,6 @@
         if (!isAdminLoggedIn) return;
         document.getElementById('modalTitle').innerText = presetSeatNum ? `حجز المقعد رقم (${presetSeatNum})` : 'إضافة مقعد جديد';
         document.getElementById('modalSeatNum').value = presetSeatNum;
-        document.getElementById('modalSeatNum').readOnly = false;
         document.getElementById('modalName').value = '';
         document.getElementById('modalTitleRole').value = '';
         bsEditModal.show();
@@ -643,7 +652,6 @@
 
         document.getElementById('modalTitle').innerText = `تعديل بيانات المقعد رقم (${seatNum})`;
         document.getElementById('modalSeatNum').value = guest.seat;
-        document.getElementById('modalSeatNum').readOnly = true;
         document.getElementById('modalSection').value = guest.section || 'الصف الأول';
         document.getElementById('modalName').value = guest.name;
         document.getElementById('modalTitleRole').value = guest.title || '';
@@ -662,35 +670,29 @@
             seatMap[seatNum].name = name;
             seatMap[seatNum].title = title;
         } else {
-            const newGuest = { seat: seatNum, section, name, title };
-            guestsData.push(newGuest);
+            guestsData.push({ seat: seatNum, section, name, title });
         }
 
-        updateUI();
+        refreshCurrentView();
         bsEditModal.hide();
-        if (document.getElementById('seatInput').value) checkSeat();
     }
 
     function deleteSeat(seatNum) {
         if (!isAdminLoggedIn) return;
         if (confirm(`هل أنت تأكد من إخلاء الكرسي رقم (${seatNum}) وتحويله لشاغر؟`)) {
             guestsData = guestsData.filter(g => g.seat !== seatNum);
-            updateUI();
-            if (document.getElementById('seatInput').value) checkSeat();
+            refreshCurrentView();
         }
     }
 
     function clearSearch(inputId) {
         document.getElementById(inputId).value = '';
-        if (inputId === 'searchInput') searchData();
-        if (inputId === 'seatInput') checkSeat();
+        refreshCurrentView();
     }
 
     function exportToExcel() {
         const exportArr = [["الصفه", "الاسم", "أرقام الجلوس"]];
-        guestsData.forEach(g => {
-            exportArr.push([g.title, g.name, g.seat]);
-        });
+        guestsData.forEach(g => exportArr.push([g.title, g.name, g.seat]));
         const ws = XLSX.utils.aoa_to_sheet(exportArr);
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, "جدول الحضور المحدث");
